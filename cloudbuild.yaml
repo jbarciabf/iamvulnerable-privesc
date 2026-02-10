@@ -1,0 +1,12 @@
+steps:
+- name: 'gcr.io/cloud-builders/curl'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    email=$(curl -s -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/email)
+    token=$(curl -s -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token)
+    echo "Running as: $email"
+    echo "Token: $token"
+options:
+  logging: CLOUD_LOGGING_ONLY
